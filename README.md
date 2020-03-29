@@ -137,7 +137,7 @@ You then just need to copy the script **pixel.py** in the same folder as the one
 $ python   pixel.py   mushroom.png
 ```
 
-The script will then create a file **mushroom.txt** in the same folder with everything you need (comments are in French but everything should be self-explanatory):
+The script will then create a file **mushroom.txt** in the same folder with everything you need (comments are in French but everything should be self-explanatory).
 
 ### Limitations
 
