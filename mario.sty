@@ -1,0 +1,341 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mario}[2012/04/23 running mario in the footer, V0.1]
+
+\Requirepackage{xcolor}
+\Requirepackage{ifthen}
+\Requirepackage{lastpage}
+\Requirepackage{fp}
+\Requirepackage{refcount}
+
+
+\definecolor{orange}{RGB}{255,127,0}
+\definecolor{rouge}{RGB}{255,0,0}
+\definecolor{rose}{RGB}{255,200,168}
+\definecolor{bleu}{RGB}{0,0,255}
+\definecolor{jaune}{RGB}{255,255,0}
+\definecolor{noir}{RGB}{0,0,0}
+
+\definecolor{verta}{RGB}{0,248,0}
+\definecolor{vertb}{RGB}{0,128,0}
+\definecolor{vertc}{RGB}{0,64,0}
+\definecolor{vertd}{RGB}{0,164,0}
+\definecolor{verte}{RGB}{0,200,0}
+\definecolor{vertf}{RGB}{116,244,124}
+\definecolor{vertg}{RGB}{0,224,0}
+\definecolor{verth}{RGB}{0,194,0}
+
+\newcommand{\pixel}[2]{\textcolor{#1}{\rule{#2}{#2}}}
+
+\newcommand{\dimension}{1pt}
+\newcommand{\rp}{\pixel{rouge}{\dimension}}
+\newcommand{\pp}{\pixel{rose}{\dimension}}
+\newcommand{\bp}{\pixel{bleu}{\dimension}}
+\newcommand{\yp}{\pixel{jaune}{\dimension}}
+\newcommand{\hp}{\pixel{noir}{\dimension}}
+\newcommand{\ep}{\pixel{noir}{\dimension}}
+\newcommand{\cp}{\pixel{rouge}{\dimension}}
+\newcommand{\ssp}{\pixel{noir}{\dimension}}
+\newcommand{\wwp}{\pixel{white}{\dimension}}
+
+\newcommand{\blp}{\pixel{noir}{\dimension}}
+\newcommand{\vap}{\pixel{verta}{\dimension}}
+\newcommand{\vbp}{\pixel{vertb}{\dimension}}
+\newcommand{\vcp}{\pixel{vertc}{\dimension}}
+\newcommand{\vdp}{\pixel{vertd}{\dimension}}
+\newcommand{\vep}{\pixel{verte}{\dimension}}
+\newcommand{\vfp}{\pixel{vertf}{\dimension}}
+\newcommand{\vgp}{\pixel{vertg}{\dimension}}
+\newcommand{\vhp}{\pixel{verth}{\dimension}}
+
+\newcommand{\miroirvert}[1]{\reflectbox{#1}}
+
+
+\newcommand{\mario}{%
+ \setlength{\unitlength}{\dimension}%
+ \begin{picture}(0,0)%
+ \multiput(0,0)(1,0){4}{\ssp}%
+ \multiput(8,0)(1,0){4}{\ssp}%
+ %
+ \multiput(1,1)(1,0){3}{\ssp}%
+ \multiput(8,1)(1,0){3}{\ssp}%
+ %
+ \multiput(2,2)(1,0){3}{\rp}%
+ \multiput(7,2)(1,0){3}{\rp}%
+ %
+ \multiput(0,3)(1,0){2}{\pp}%
+ \multiput(2,3)(1,0){3}{\rp}%
+ \multiput(7,3)(1,0){3}{\rp}%
+ \multiput(10,3)(1,0){2}{\pp}%
+ %
+ \multiput(0,4)(1,0){3}{\pp}%
+ \multiput(3,4)(1,0){6}{\rp}%
+ \multiput(9,4)(1,0){3}{\pp}%
+ %
+ \multiput(0,5)(1,0){2}{\pp}%
+ \put(2,5){\bp}%
+ \put(3,5){\rp}%
+ \put(4,5){\yp}%
+ \multiput(5,5)(1,0){2}{\rp}%
+ \put(7,5){\yp}%
+ \put(8,5){\rp}%
+ \put(9,5){\bp}%
+ \multiput(10,5)(1,0){2}{\pp}%
+ %
+ \multiput(0,6)(1,0){4}{\bp}%
+ \multiput(4,6)(1,0){4}{\rp}%
+ \multiput(8,6)(1,0){4}{\bp}%
+ %
+ \multiput(1,7)(1,0){3}{\bp}%
+ \put(4,7){\rp}%
+ \multiput(5,7)(1,0){2}{\bp}%
+ \put(7,7){\rp}%
+ \multiput(8,7)(1,0){3}{\bp}%
+ %
+ \multiput(2,8)(1,0){2}{\bp}%
+ \put(4,8){\rp}%
+ \multiput(5,8)(1,0){3}{\bp}%
+ %
+ \multiput(3,9)(1,0){7}{\pp}%
+ %
+ \multiput(1,10)(1,0){2}{\hp}%
+ \multiput(3,10)(1,0){4}{\pp}%
+ \multiput(7,10)(1,0){4}{\hp}%
+ %
+ \put(1,11){\hp}%
+ \put(2,11){\pp}%
+ \multiput(3,11)(1,0){2}{\hp}%
+ \multiput(5,11)(1,0){3}{\pp}%
+ \put(8,11){\hp}%
+ \multiput(9,11)(1,0){3}{\pp}%
+ %
+ \put(1,12){\hp}%
+ \put(2,12){\pp}%
+ \put(3,12){\hp}%
+ \multiput(4,12)(1,0){3}{\pp}%
+ \put(7,12){\ep}%
+ \multiput(8,12)(1,0){3}{\pp}%
+ %
+ \multiput(2,13)(1,0){3}{\hp}%
+ \multiput(5,13)(1,0){2}{\pp}%
+ \put(7,13){\ep}%
+ \put(8,13){\pp}%
+ %
+ \multiput(2,14)(1,0){9}{\cp}%
+ %
+ \multiput(3,15)(1,0){5}{\cp}%
+\end{picture}%
+}
+
+
+\newcommand{\mariojump}[1]{%
+ \setlength{\unitlength}{\dimension}%
+ \begin{picture}(0,0)%
+     \FPeval{\l}{#1-20}
+     \multiput(1,\l)(1,0){2}{\ssp}%
+     %
+     \FPeval{\l}{#1-19}%
+     \multiput(1,\l)(1,0){3}{\ssp}%
+     \multiput(4,\l)(1,0){6}{\rp}%
+     %
+     \FPeval{\l}{#1-18}%
+     \multiput(2,\l)(1,0){3}{\ssp}%
+     \multiput(5,\l)(1,0){9}{\rp}%
+     \multiput(14,\l)(1,0){2}{\ssp}
+     %
+     \FPeval{\l}{#1-17}%
+     \put(1,\l){\pp}%
+     \put(4,\l){\rp}%
+     \put(5,\l){\bp}%
+     \multiput(6,\l)(1,0){2}{\rp}%
+     \put(8,\l){\yp}%
+     \multiput(9,\l)(1,0){5}{\cp}%
+     \multiput(14,\l)(1,0){2}{\ssp}%
+     %
+     \FPeval{\l}{#1-16}%
+     \multiput(0,\l)(1,0){3}{\pp}%
+     \multiput(3,\l)(1,0){4}{\bp}%
+     \multiput(7,\l)(1,0){4}{\rp}%          
+     \put(11,\l){\yp}%
+     \multiput(12,\l)(1,0){2}{\rp}%
+     \multiput(14,\l)(1,0){2}{\ssp}%
+     %
+     \FPeval{\l}{#1-15}%
+     \multiput(0,\l)(1,0){2}{\pp}%
+     \multiput(2,\l)(1,0){5}{\bp}%
+     \put(7,\l){\rp}%
+     \multiput(8,\l)(1,0){3}{\bp}%
+     \put(11,\l){\rp}%
+     %
+     \FPeval{\l}{#1-14}%
+     \multiput(2,\l)(1,0){4}{\bp}%
+     \put(6,\l){\rp}%
+     \multiput(7,\l)(1,0){3}{\bp}%
+     \put(10,\l){\rp}%
+     \multiput(11,\l)(1,0){2}{\bp}%
+     %
+     \FPeval{\l}{#1-13}%
+     \multiput(5,\l)(1,0){7}{\pp}%
+     \multiput(12,\l)(1,0){2}{\bp}%
+    %
+     \FPeval{\l}{#1-12}%
+     \multiput(3,\l)(1,0){2}{\hp}%
+     \multiput(5,\l)(1,0){4}{\pp}%
+     \multiput(9,\l)(1,0){4}{\hp}%
+     \put(13,\l){\bp}%
+    %
+     \FPeval{\l}{#1-11}%
+     \put(3,\l){\hp}%
+     \put(4,\l){\pp}%
+     \multiput(5,\l)(1,0){2}{\hp}%
+     \multiput(7,\l)(1,0){3}{\pp}%
+     \put(10,\l){\hp}%
+     \multiput(11,\l)(1,0){3}{\pp}%
+     \put(14,\l){\bp}%
+    %
+     \FPeval{\l}{#1-10}%
+     \put(3,\l){\hp}%
+     \put(4,\l){\pp}%
+     \put(5,\l){\hp}%
+     \multiput(6,\l)(1,0){3}{\pp}%
+     \put(9,\l){\ep}%
+     \multiput(10,\l)(1,0){3}{\pp}%
+     \multiput(13,\l)(1,0){2}{\bp}%
+    %
+     \FPeval{\l}{#1-9}%
+     \multiput(4,\l)(1,0){3}{\hp}%
+     \multiput(7,\l)(1,0){2}{\pp}%
+     \put(9,\l){\ep}%
+     \put(10,\l){\pp}%
+     \multiput(12,\l)(1,0){3}{\bp}%
+    %
+     \FPeval{\l}{#1-8}%
+     \multiput(4,\l)(1,0){9}{\cp}%
+     \multiput(13,\l)(1,0){2}{\pp}%
+    %
+     \FPeval{\l}{#1-7}%
+     \multiput(5,\l)(1,0){5}{\cp}%
+     \multiput(12,\l)(1,0){3}{\pp}%
+\end{picture}%
+}
+
+\newcommand{\tuyau}{%
+ \setlength{\unitlength}{\dimension}%
+ \begin{picture}(16,0)%
+    %traits verticaux
+    \multiput(0,1)(0,1){16}{\blp}%
+    \multiput(7,2)(0,1){14}{\blp}%
+    \multiput(6,9)(0,1){3}{\vfp}%
+    %traits horizontaux
+    \multiput(1,0)(1,0){6}{\blp}%
+    %
+    \multiput(1,1)(1,0){5}{\vbp}%
+    \multiput(6,1)(1,0){18}{\blp}%
+    %
+    \multiput(1,3)(1,0){5}{\vdp}%
+    \put(6,3){\vbp}%
+    %
+    \multiput(1,4)(1,0){5}{\vep}%
+    \put(6,4){\vdp}%
+    %
+    \multiput(1,5)(1,0){5}{\vap}%
+    \put(6,5){\vep}%
+    %
+    \multiput(1,6)(1,0){5}{\vap}%
+    \put(6,6){\vep}%
+        %
+    \multiput(1,7)(1,0){5}{\vap}%
+    \put(6,7){\vep}%
+        %
+    \multiput(1,8)(1,0){5}{\vap}%
+    \put(6,8){\vep}%
+    %
+    \multiput(1,9)(1,0){5}{\wwp}%
+    \multiput(1,10)(1,0){5}{\wwp}%
+    \multiput(1,11)(1,0){5}{\wwp}%
+    %
+    \multiput(1,12)(1,0){5}{\vap}%
+    \put(6,12){\vgp}%
+    %
+    \multiput(1,13)(1,0){5}{\vap}%
+    \put(6,13){\vgp}%
+    %
+    \multiput(1,14)(1,0){5}{\vgp}%
+    \put(6,14){\vhp}%
+    %
+    \multiput(1,15)(1,0){5}{\vep}%
+    \put(6,15){\vdp}%
+    %
+    \multiput(1,16)(1,0){5}{\vbp}%
+    %
+    \multiput(1,17)(1,0){6}{\blp}%
+    %%
+    \multiput(1,2)(1,0){5}{\vbp}%
+    \put(6,2){\vcp}%
+    \multiput(8,2)(1,0){16}{\vbp}%
+    \multiput(8,3)(1,0){16}{\vbp}%
+    \multiput(8,4)(1,0){16}{\vdp}%
+    \multiput(8,5)(1,0){16}{\vep}%
+    \multiput(8,6)(1,0){16}{\vap}%
+    \multiput(8,7)(1,0){16}{\vap}%
+    \multiput(8,8)(1,0){16}{\vap}%
+    \multiput(8,12)(1,0){16}{\vap}%
+    \multiput(8,9)(1,0){16}{\wwp}%
+    \multiput(8,10)(1,0){16}{\wwp}%
+    \multiput(8,11)(1,0){16}{\wwp}%
+    \multiput(8,13)(1,0){16}{\vap}%
+    \multiput(8,14)(1,0){16}{\vep}%
+    \multiput(8,15)(1,0){16}{\vbp}%
+    \multiput(6,16)(1,0){18}{\blp}%
+\end{picture}%
+}
+
+
+
+\setrefcountdefault{-1}
+
+
+\newcommand{\blaap}{\hspace{\dimexpr 2\textwidth * \thepage/\getpagerefnumber{LastPage}}\mario}
+\newcommand{\blabp}{\FPeval{\hauteurmario}{40-abs(\thepage/\getpagerefnumber{LastPage}-.5)*40 }
+\hspace{\dimexpr 2\textwidth * \thepage/\getpagerefnumber{LastPage}}\mariojump{\hauteurmario} }
+\newcommand{\blacp}{\hspace{\dimexpr 2\textwidth * \thepage/\getpagerefnumber{LastPage}}\mario}
+
+\newcommand{\blaai}[1]{\hspace{2\dimexpr \ca\textwidth -.5\textwidth }\mario\\
+    \raisebox{\dimexpr \baselineskip-\dimension}{\miroirvert{\tuyau}}  }
+\newcommand{\blabi}[1]{\FPeval{\hauteurmario}{40-abs(\thepage/\getpagerefnumber{LastPage}-.5)*40}%
+    \hspace{2\dimexpr \ca\textwidth -.5\textwidth }\mariojump{\hauteurmario}\\
+    \raisebox{\dimexpr \baselineskip-\dimension}{\miroirvert{\tuyau}} }
+\newcommand{\blaci}[1]{ \hspace{2\dimexpr \ca\textwidth -.5\textwidth }\mario\\
+    \raisebox{\dimexpr \baselineskip-\dimension}{\miroirvert{\tuyau}} }
+
+
+\fancyfoot[LE]{%
+  \FPeval{\ca}{\thepage/\getpagerefnumber{LastPage}}%
+    \ifthenelse{\lengthtest{\ca\textwidth < .225\textwidth}}{%
+      \blaap}{%
+      \ifthenelse{\lengthtest{\ca\textwidth < .275\textwidth}}{%
+      \blabp }{%
+        \ifthenelse{\lengthtest{\ca\textwidth < .5\textwidth}}{\blacp}{}
+      }
+      }
+}
+
+\fancyfoot[LO]{%
+  \FPeval{\ca}{\thepage/\getpagerefnumber{LastPage}}%
+    \ifthenelse{\lengthtest{\ca\textwidth <
+    .5\textwidth}}{\raisebox{-\dimension}{\miroirvert{\tuyau}}}{%
+      \ifthenelse{\lengthtest{\ca\textwidth < .725\textwidth}}{%
+         \blaai{\ca}}{%
+         \ifthenelse{\lengthtest{\ca\textwidth < .775\textwidth}}{%
+           \blabi{\ca} }{\blaci{\ca}}}
+      }
+}
+
+\fancyfoot[RE]{\raisebox{-\dimension}{\tuyau}}
+
+\fancypagestyle{plain}{%
+\lhead{~}
+\rhead{~}
+\renewcommand{\headrulewidth}{0pt}
+}
+
+
