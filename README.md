@@ -12,6 +12,7 @@ There has to be a numerous different ways to do pixel art using LATEX. To keep t
 ```  
 
 It's now just a matter of using the picture environment ! You can learn how to use it here if you want to. An example of what you can achieve:
+
 ![mario](/files/mario.png)
 
 And the corresponding code:
